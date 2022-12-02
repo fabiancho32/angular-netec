@@ -1,0 +1,42 @@
+<label>Primer nombre:</label>
+<input type="text" [(ngModel)]="persona.primer_nombre" placeholder="Primer nombre" />
+<br />
+<label>Segundo nombre:</label>
+<input type="text" [(ngModel)]="persona.segundo_nombre" placeholder="Segundo nombre" />
+<br />
+<label>Primer apellido:</label>
+<input type="text" [(ngModel)]="persona.primer_apellido" placeholder="Primer apellido" />
+<br />
+<label>Segundo apellido:</label>
+<input type="text" [(ngModel)]="persona.segundo_apellido" placeholder="segundo apellido" />
+<br />
+<label>Estudios:</label>
+<select [(ngModel)]="persona.estudios">
+    <option *ngFor="let estudio of estudios" [ngValue]="estudio"> {{estudio.value}}</option>
+</select>
+<br />
+<label>Sexo:</label>
+<label *ngFor="let genero of generos"><input type="radio" name="sexo" (click)="cambiarGenero(genero)">
+    {{genero.value}}</label><br>
+<br />
+<button (click)="agregarLista()">Agregar</button>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<table>
+    <thead>
+        <th>Nombres</th>
+        <th>Apellidos</th>
+        <th>Estudios</th>
+        <th>Genero</th>
+    </thead>
+    <tbody *ngFor="let persona of listaPersonas">
+        <td>{{ persona.primer_nombre + " " + (persona.segundo_nombre? persona.segundo_nombre : "") }}</td>
+        <td>{{ persona.primer_apellido + " " + (persona.segundo_apellido? persona.segundo_apellido : "") }}</td>
+        <td>{{ persona.estudios?.value}}</td>
+        <td>{{ persona.sexo?.value}}</td>
+    </tbody>
+</table>
