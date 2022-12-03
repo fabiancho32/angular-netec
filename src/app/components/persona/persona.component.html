@@ -10,6 +10,9 @@
 <label>Segundo apellido:</label>
 <input type="text" [(ngModel)]="persona.segundo_apellido" placeholder="segundo apellido" />
 <br />
+<label>Fecha de nacimiento</label>
+<input type="date" (change)="SendDataonChange($event)" />
+<br />
 <label>Estudios:</label>
 <select [(ngModel)]="persona.estudios">
     <option *ngFor="let estudio of estudios" [ngValue]="estudio"> {{estudio.value}}</option>
@@ -26,17 +29,29 @@
 <br />
 <br />
 <br />
-<table>
-    <thead>
-        <th>Nombres</th>
-        <th>Apellidos</th>
-        <th>Estudios</th>
-        <th>Genero</th>
-    </thead>
-    <tbody *ngFor="let persona of listaPersonas">
-        <td>{{ persona.primer_nombre + " " + (persona.segundo_nombre? persona.segundo_nombre : "") }}</td>
-        <td>{{ persona.primer_apellido + " " + (persona.segundo_apellido? persona.segundo_apellido : "") }}</td>
-        <td>{{ persona.estudios?.value}}</td>
-        <td>{{ persona.sexo?.value}}</td>
-    </tbody>
-</table>
+<h1>Personas registradas</h1>
+<div [ngSwitch]="listaPersonas.length > 0">
+    <div *ngSwitchCase="false" >
+        <p>Lo sentimos no se ha registrado ninguna informaci&oacute;n....</p>
+    </div>
+    <div *ngSwitchCase="true" >
+        <table>
+            <thead>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Estudios</th>
+                <th>Genero</th>
+                <th>Fecha de nacimiento</th>
+                <th>Menor de edad</th>
+            </thead>
+            <tbody *ngFor="let persona of listaPersonas">
+                <td>{{ persona.primer_nombre + " " + (persona.segundo_nombre? persona.segundo_nombre : '' ) }}</td>
+                <td>{{ persona.primer_apellido + " " + (persona.segundo_apellido? persona.segundo_apellido : "") }}</td>
+                <td>{{ persona.estudios?.value}}</td>
+                <td>{{ persona.sexo?.value}}</td>
+                <td>{{ (persona.fecha_nacimiento ? (persona.fecha_nacimiento | date) : '' )}}</td>
+                <td>{{ (persona.fecha_nacimiento ? (calcularEdad(persona.fecha_nacimiento) > 18? 'NO' : 'SI')  : '' )}}</td>
+            </tbody>
+        </table>
+    </div>
+</div>
