@@ -1,5 +1,6 @@
 import { Generico } from './generico.model';
 export interface Persona{
+    id?:string;
     primer_nombre?: string;
     segundo_nombre?: string;
     primer_apellido?: string;

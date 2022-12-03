@@ -1,3 +1,4 @@
+import { PersonaService } from './../../services/persona/persona.service';
 import { Generico } from './../../models/generico.model';
 import { Persona } from './../../models/persona.model';
 import { Component } from '@angular/core';
@@ -21,12 +22,12 @@ export class PersonaComponent {
 
   public listaPersonas: Persona[];
 
-  constructor(){
+  constructor(private personaService:PersonaService){
     this.listaPersonas = [];
     this.persona = {};
     this.personas = [];
     this.estudioSeleccionado = {};
-
+    this.getPersonas();
     this.generos = [
       {id:'0', value:'Masculino'},
       {id:'0', value:'Femenino'},
@@ -61,10 +62,27 @@ export class PersonaComponent {
       this.estudioSeleccionado = {};
     }
 
-
-
-    
-
-
   }
+
+  SendDataonChange(event: any) {
+    this.persona.fecha_nacimiento = event.target.value;
+    }
+
+    calcularEdad(fecha: Date) {
+      var hoy = new Date();
+      var cumpleanos = new Date(fecha);
+      var edad = hoy.getFullYear() - cumpleanos.getFullYear();
+      var m = hoy.getMonth() - cumpleanos.getMonth();
+  
+      if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
+          edad--;
+      }
+  
+      return edad;
+  }
+
+  getPersonas(){
+    this.personaService.getPersonas().subscribe((data) => (this.listaPersonas = data));
+  }
+
 }
