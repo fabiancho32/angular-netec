@@ -1,0 +1,33 @@
+Comandos importantes
+Crear instancia de NPM -> npm init -y
+Instalar TypeScript -> npm install -g typescript
+tsconfig -> tsc --init
+Instalar Ejecutar TypeScript -> npm install -g ts-node
+Ejecutar codigo TypeScript -> ts-node main.ts
+
+Instalación de Angular -> npm i @angular/cli --lts
+Nuevo proyecto Angular -> ng new nombreProyecto
+Crear un componente -> ng generate component component/proceso
+Crear una directiva -> ng generate directive directivas/nombreDirectiva
+
+Cuando se baja un proyecto por primera vez se debe ejecutar -> npm install
+Librerias para pruebas unitarias -> Jasmin
+Crear una directiva ->ng generate directive carpeta/nombreDirectiva
+
+
+
+Mini proyecto: Yo Fabián García requiero un formulario el cual debe guardar en memoria los siguientes datos, Primer nombre, segundo nombre, primer apellido, segundo apellido, fecha de nacimiento, estudios (Profesional, bachiller, etc), sexo (Checkbox), debe tener un botón añadir y me los debe agregar a una lista en la cual los menores de 18 años deben estar diferenciados.
+
+
+import { HttpClientModule } from '@angular/common/http';
+
+https://loopback.io/lb3/getting-started
+
+
+Mejoras al proyecto pendientes: 
+
+1. Vamos a crear un Pipe para cuando nuestro campo este vacio o indefinido lo vamos a usar en la tabla.
+2. Reparar Estudios y Genero para que muestre contenido en la tabla correctamente
+3. Crear e implementar el metodo POST de Persona en el componente persona. 
+
+

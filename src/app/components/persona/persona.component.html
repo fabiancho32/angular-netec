@@ -1,41 +1,78 @@
-<label>Primer nombre:</label>
-<input type="text" [(ngModel)]="persona.primer_nombre" placeholder="Primer nombre" />
-<br />
-<label>Segundo nombre:</label>
-<input type="text" [(ngModel)]="persona.segundo_nombre" placeholder="Segundo nombre" />
-<br />
-<label>Primer apellido:</label>
-<input type="text" [(ngModel)]="persona.primer_apellido" placeholder="Primer apellido" />
-<br />
-<label>Segundo apellido:</label>
-<input type="text" [(ngModel)]="persona.segundo_apellido" placeholder="segundo apellido" />
-<br />
-<label>Fecha de nacimiento</label>
-<input type="date" (change)="SendDataonChange($event)" />
-<br />
-<label>Estudios:</label>
-<select [(ngModel)]="persona.estudios">
-    <option *ngFor="let estudio of estudios" [ngValue]="estudio"> {{estudio.value}}</option>
-</select>
-<br />
-<label>Sexo:</label>
-<label *ngFor="let genero of generos"><input type="radio" name="sexo" (click)="cambiarGenero(genero)">
-    {{genero.value}}</label><br>
-<br />
-<button (click)="agregarLista()">Agregar</button>
+<div class="container">
+    <div class="mb-3"></div>
+    <div class="row">
+        <div class="col-6 col-md-6">
+            <div class="form-floating mb-3">
+                <input type="text" id="primer_nombre" name="primer_nombre" [(ngModel)]="persona.primer_nombre"
+                    placeholder="Primer nombre" class="form-control  form-control-sm" />
+                <label for="primer_nombre" class="form-label">Primer nombre</label>
+            </div>
+        </div>
+        <div class="col-6 col-md-6">
+            <div class="form-floating mb-3">
+                <input type="text" id="segundo_nombre" name="segundo_nombre" [(ngModel)]="persona.segundo_nombre"
+                    placeholder="Segundo nombre" class="form-control  form-control-sm" />
+                <label for="segundo_nombre" class="form-label">Segundo nombre</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="form-floating mb-3">
+                <input type="text" id="primer_apellido" name="primer_apellido" [(ngModel)]="persona.primer_apellido"
+                    placeholder="Primer apellido" class="form-control  form-control-sm" />
+                <label for="primer_apellido" class="form-label">Primer apellido</label>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="form-floating mb-3">
+                <input type="text" id="segundo_apellido" name="segundo_apellido" [(ngModel)]="persona.segundo_apellido"
+                    placeholder="Segundo apellido" class="form-control  form-control-sm" />
+                <label for="segundo_apellido" class="form-label">Segundo apellido</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="form-floating mb-3">
+                <input id="fecha_nacimiento" name="fecha_nacimiento" type="date" class="form-control"
+                    (change)="SendDataonChange($event)" />
+                <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento</label>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="form-floating mb-3">
+                <select class="form-select" id="floatingSelect" [(ngModel)]="persona.estudios">
+                    <option *ngFor="let estudio of estudios" [ngValue]="estudio"> {{estudio.value}}</option>
+                </select>
+                <label for="floatingSelect">Estudios</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <label class="form-label mb-3">Sexo: &nbsp;</label>
+            <div class="form-check form-check-inline mb-3" *ngFor="let genero of generos">
+                <input type="radio" class="form-check-input" name="sexo" (click)="cambiarGenero(genero)">
+                <label class="form-check-label">{{genero.value}}</label>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <button type="button" class="btn btn-success" (click)="agregarLista()">
+                Agregar
+            </button>
+        </div>
+    </div>
+</div>
+{{persona.primer_nombre | vacio}}
 
-<br />
-<br />
-<br />
-<br />
-<br />
 <h1>Personas registradas</h1>
 <div [ngSwitch]="listaPersonas.length > 0">
-    <div *ngSwitchCase="false" >
+    <div *ngSwitchCase="false">
         <p>Lo sentimos no se ha registrado ninguna informaci&oacute;n....</p>
     </div>
-    <div *ngSwitchCase="true" >
-        <table>
+    <div *ngSwitchCase="true">
+        <table class="table">
             <thead>
                 <th>Nombres</th>
                 <th>Apellidos</th>
@@ -45,12 +82,13 @@
                 <th>Menor de edad</th>
             </thead>
             <tbody *ngFor="let persona of listaPersonas">
-                <td>{{ persona.primer_nombre + " " + (persona.segundo_nombre? persona.segundo_nombre : '' ) }}</td>
+                <td>{{ persona.primer_nombre + " " + (persona.segundo_nombre | vacio ) }}</td>
                 <td>{{ persona.primer_apellido + " " + (persona.segundo_apellido? persona.segundo_apellido : "") }}</td>
                 <td>{{ persona.estudios?.value}}</td>
                 <td>{{ persona.sexo?.value}}</td>
                 <td>{{ (persona.fecha_nacimiento ? (persona.fecha_nacimiento | date) : '' )}}</td>
-                <td>{{ (persona.fecha_nacimiento ? (calcularEdad(persona.fecha_nacimiento) > 18? 'NO' : 'SI')  : '' )}}</td>
+                <td>{{ (persona.fecha_nacimiento ? (calcularEdad(persona.fecha_nacimiento) > 18? 'NO' : 'SI') : '' )}}
+                </td>
             </tbody>
         </table>
     </div>

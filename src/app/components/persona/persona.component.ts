@@ -1,3 +1,4 @@
+import { PersonaService } from './../../services/persona/persona.service';
 import { Generico } from './../../models/generico.model';
 import { Persona } from './../../models/persona.model';
 import { Component } from '@angular/core';
@@ -21,16 +22,17 @@ export class PersonaComponent {
 
   public listaPersonas: Persona[];
 
-  constructor(){
+  constructor(private personasService:PersonaService){
+    this.getPersonas();
     this.listaPersonas = [];
     this.persona = {};
     this.personas = [];
     this.estudioSeleccionado = {};
 
     this.generos = [
-      {id:'0', value:'Masculino'},
-      {id:'0', value:'Femenino'},
-      {id:'0', value:'Otro'}
+      {id:'1', value:'Masculino'},
+      {id:'2', value:'Femenino'},
+      {id:'3', value:'Otro'}
     ];
 
     this.estudios = [
@@ -42,6 +44,13 @@ export class PersonaComponent {
       {id:'4', value:'Posgrado'}
     ]
   }
+
+  getPersonas(){
+    this.personasService.getPersonas().subscribe((data) => {
+      this.listaPersonas = data;
+    } )
+  }
+
 
   cambiarGenero(genero: Generico){
     this.persona.sexo = genero;
