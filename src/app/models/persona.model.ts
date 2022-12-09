@@ -5,6 +5,6 @@ export interface Persona{
     primer_apellido?: string;
     segundo_apellido?: string;
     fecha_nacimiento?: Date;
-    estudios?: Generico;
-    sexo?: Generico;
+    estudios?: string;
+    sexo?: string;
 }

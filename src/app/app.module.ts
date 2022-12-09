@@ -8,12 +8,18 @@ import { AppComponent } from './app.component';
 import { PersonaComponent } from './components/persona/persona.component';
 import { VacioPipe } from './pipes/vacio/vacio.pipe';
 import { HttpClientModule } from '@angular/common/http';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { HomeComponent } from './components/home/home.component';
+import { ListaPersonasComponent } from './components/lista-personas/lista-personas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PersonaComponent,
-    VacioPipe
+    VacioPipe,
+    NotFoundComponent,
+    HomeComponent,
+    ListaPersonasComponent
   ],
   imports: [
     BrowserModule,
